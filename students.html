@@ -1,0 +1,40 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Students – Admin{% endblock %}
+{% block content %}
+<div class="admin-page">
+  <div class="admin-page-header">
+    <h1 class="admin-page-title">All Students</h1>
+    <a href="{{ url_for('admin_add_student') }}" class="btn-primary">+ Add Student</a>
+  </div>
+
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Matric No.</th>
+        <th>Email</th>
+        <th>Program</th>
+        <th>Level</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for s in students %}
+      <tr>
+        <td><strong>{{ s.full_name }}</strong></td>
+        <td class="mono">{{ s.matric_number }}</td>
+        <td>{{ s.email }}</td>
+        <td>{{ s.program }}</td>
+        <td>{{ s.level }}</td>
+        <td>
+          <a href="{{ url_for('admin_manage_grades', student_id=s.id) }}" class="table-action">Grades</a>
+          <a href="{{ url_for('admin_manage_courses', student_id=s.id) }}" class="table-action">Courses</a>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="6" style="text-align:center;color:#999;padding:2rem;">No students registered yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

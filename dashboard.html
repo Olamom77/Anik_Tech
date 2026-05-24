@@ -1,0 +1,65 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Dashboard – Admin{% endblock %}
+{% block content %}
+<div class="admin-page">
+  <div class="admin-page-header">
+    <h1 class="admin-page-title">Dashboard</h1>
+    <a href="{{ url_for('admin_add_student') }}" class="btn-primary">+ Add Student</a>
+  </div>
+
+  <div class="admin-stats-grid">
+    <div class="admin-stat-card">
+      <div class="admin-stat-num">{{ total_students }}</div>
+      <div class="admin-stat-label">Total Students</div>
+    </div>
+    <div class="admin-stat-card">
+      <div class="admin-stat-num">{{ total_courses }}</div>
+      <div class="admin-stat-label">Course Enrollments</div>
+    </div>
+    <div class="admin-stat-card">
+      <div class="admin-stat-num">38</div>
+      <div class="admin-stat-label">Programs Offered</div>
+    </div>
+    <div class="admin-stat-card">
+      <div class="admin-stat-num">6</div>
+      <div class="admin-stat-label">Schools</div>
+    </div>
+  </div>
+
+  <div class="admin-section">
+    <div class="admin-section-header">
+      <h2 class="admin-section-title">Recent Students</h2>
+      <a href="{{ url_for('admin_students') }}" class="admin-view-all">View all</a>
+    </div>
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Matric No.</th>
+          <th>Program</th>
+          <th>Level</th>
+          <th>Joined</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for s in recent_students %}
+        <tr>
+          <td><strong>{{ s.full_name }}</strong></td>
+          <td class="mono">{{ s.matric_number }}</td>
+          <td>{{ s.program }}</td>
+          <td>{{ s.level }}</td>
+          <td>{{ s.created_at.strftime('%d %b %Y') }}</td>
+          <td>
+            <a href="{{ url_for('admin_manage_grades', student_id=s.id) }}" class="table-action">Grades</a>
+            <a href="{{ url_for('admin_manage_courses', student_id=s.id) }}" class="table-action">Courses</a>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6" style="text-align:center;color:#999;padding:2rem;">No students yet. <a href="{{ url_for('admin_add_student') }}">Add one</a>.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

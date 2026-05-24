@@ -1,0 +1,73 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Grades – {{ student.full_name }}{% endblock %}
+{% block content %}
+<div class="admin-page">
+  <div class="admin-page-header">
+    <div>
+      <h1 class="admin-page-title">{{ student.full_name }}</h1>
+      <p style="color:#777;font-size:13px;">{{ student.matric_number }} · {{ student.program }} · {{ student.level }}</p>
+    </div>
+    <a href="{{ url_for('admin_students') }}" class="btn-secondary">← Students</a>
+  </div>
+
+  <div class="admin-two-col">
+    <!-- Add grade form -->
+    <div class="admin-form-card">
+      <h2 class="admin-section-title" style="margin-bottom:1rem;">Add Grade</h2>
+      <form method="POST" class="auth-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Course Code</label>
+            <input type="text" name="course_code" class="form-input" placeholder="e.g. CSC301" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Credit Units</label>
+            <input type="number" name="credit_units" class="form-input" value="3" min="1" max="6" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Course Title</label>
+          <input type="text" name="course_title" class="form-input" placeholder="e.g. Data Structures" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Score (0–100)</label>
+            <input type="number" name="score" class="form-input" min="0" max="100" step="0.1" placeholder="e.g. 75" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Semester</label>
+            <input type="text" name="semester" class="form-input" placeholder="e.g. 2024/25 First" required>
+          </div>
+        </div>
+        <button type="submit" class="btn-primary btn-full">Save Grade &amp; Notify Student</button>
+      </form>
+    </div>
+
+    <!-- Existing grades -->
+    <div>
+      <h2 class="admin-section-title" style="margin-bottom:1rem;">Grade History</h2>
+      {% if grades %}
+        <table class="admin-table">
+          <thead>
+            <tr><th>Code</th><th>Title</th><th>Score</th><th>Grade</th><th>Units</th><th>Semester</th></tr>
+          </thead>
+          <tbody>
+            {% for g in grades %}
+            <tr>
+              <td class="mono">{{ g.course_code }}</td>
+              <td>{{ g.course_title }}</td>
+              <td>{{ g.score }}</td>
+              <td><span class="grade-badge grade-{{ g.grade }}">{{ g.grade }}</span></td>
+              <td>{{ g.credit_units }}</td>
+              <td>{{ g.semester }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p style="color:#999;font-size:13px;">No grades added yet.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

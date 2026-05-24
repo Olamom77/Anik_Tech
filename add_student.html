@@ -1,0 +1,59 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Add Student – Admin{% endblock %}
+{% block content %}
+<div class="admin-page" style="max-width:600px;">
+  <div class="admin-page-header">
+    <h1 class="admin-page-title">Add New Student</h1>
+    <a href="{{ url_for('admin_students') }}" class="btn-secondary">← Back</a>
+  </div>
+
+  <div class="admin-form-card">
+    <form method="POST" class="auth-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" name="full_name" class="form-input" placeholder="e.g. Amara Okonkwo" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Matric Number</label>
+          <input type="text" name="matric_number" class="form-input" placeholder="e.g. ATS/2024/001" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" name="email" class="form-input" placeholder="student@email.com" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Program</label>
+          <select name="program" class="form-input" required>
+            <option value="">Select program</option>
+            <option>Computer Science</option>
+            <option>Data Science</option>
+            <option>Cybersecurity</option>
+            <option>Software Engineering</option>
+            <option>Artificial Intelligence</option>
+            <option>Computer Networking</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Level</label>
+          <select name="level" class="form-input">
+            <option>100L</option>
+            <option>200L</option>
+            <option>300L</option>
+            <option>400L</option>
+            <option>500L</option>
+            <option>Postgraduate</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Temporary Password</label>
+        <input type="password" name="password" class="form-input" placeholder="Student's initial password" required>
+      </div>
+      <button type="submit" class="btn-primary btn-full">Add Student &amp; Send Welcome Email</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

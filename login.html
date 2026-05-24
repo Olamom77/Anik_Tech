@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login – Anik Tech School</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="auth-body">
+  <div class="auth-card">
+    <div class="auth-header">
+      <a href="/" class="logo">Anik <span>Tech</span></a>
+      <div class="auth-badge admin-badge-pill">Admin Access</div>
+      <h1 class="auth-title">Admin Login</h1>
+      <p class="auth-sub">Sign in to manage students, grades, and content.</p>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash flash-{{ category }}" style="margin-bottom:1rem;">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" class="auth-form">
+      <div class="form-group">
+        <label class="form-label">Username</label>
+        <input type="text" name="username" class="form-input" placeholder="Enter admin username" required autofocus>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input type="password" name="password" class="form-input" placeholder="Enter password" required>
+      </div>
+      <button type="submit" class="btn-primary btn-full">Sign In</button>
+    </form>
+
+    <div class="auth-footer-links">
+      <a href="/">← Back to website</a>
+      <a href="/portal/login">Student Portal</a>
+    </div>
+  </div>
+</body>
+</html>
