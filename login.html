@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Portal – Anik Tech School</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="auth-body">
+  <div class="auth-card">
+    <div class="auth-header">
+      <a href="/" class="logo">Anik <span>Tech</span></a>
+      <div class="auth-badge" style="background:#E1F5EE;color:#0F6E56;">Student Portal</div>
+      <h1 class="auth-title">Welcome back</h1>
+      <p class="auth-sub">Log in with your matric number to access your courses and grades.</p>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash flash-{{ category }}" style="margin-bottom:1rem;">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" class="auth-form">
+      <div class="form-group">
+        <label class="form-label">Matric Number</label>
+        <input type="text" name="matric_number" class="form-input" placeholder="e.g. ATS/2024/001" required autofocus style="text-transform:uppercase;">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input type="password" name="password" class="form-input" placeholder="Enter your password" required>
+      </div>
+      <button type="submit" class="btn-primary btn-full" style="background:#1D9E75;">Sign In to Portal</button>
+    </form>
+
+    <div class="auth-footer-links">
+      <a href="/">← Back to website</a>
+      <a href="/contact">Forgot password? Contact us</a>
+    </div>
+  </div>
+</body>
+</html>
