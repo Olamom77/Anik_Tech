@@ -368,13 +368,12 @@ if __name__ == '__main__':
         create_default_admin()
     app.run(debug=True)
 
-
 @app.route('/setup-admin-12345')
 def setup_admin():
     if Admin.query.first():
         return "Admin already exists"
     admin = Admin(username="admin", email="admin@anik.tech")
-    admin.set_password("YourStrongPassword123")
+    admin.set_password("Olamom77")
     db.session.add(admin)
     db.session.commit()
     return "Admin created successfully"
