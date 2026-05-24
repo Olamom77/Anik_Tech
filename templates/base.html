@@ -17,9 +17,26 @@
         <li><a href="/admissions">Admissions</a></li>
         <li><a href="/contact">Contact</a></li>
       </ul>
-      <a href="/admissions" class="nav-cta">Apply Now</a>
+      <div class="nav-actions">
+        {% if session.get('student_id') %}
+          <a href="/portal" class="nav-portal-btn">My Portal</a>
+        {% else %}
+          <a href="/portal/login" class="nav-portal-btn">Student Portal</a>
+        {% endif %}
+        <a href="/admissions" class="nav-cta">Apply Now</a>
+      </div>
     </div>
   </nav>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-container">
+        {% for category, message in messages %}
+          <div class="flash flash-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
 
   <main>
     {% block content %}{% endblock %}
@@ -31,8 +48,8 @@
       <p>© 2026 Anik Tech School. All rights reserved.</p>
       <div class="footer-links">
         <a href="/contact">Contact</a>
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
+        <a href="/portal/login">Student Portal</a>
+        <a href="/admin/login">Admin</a>
       </div>
     </div>
   </footer>
