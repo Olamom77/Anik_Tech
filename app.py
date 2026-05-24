@@ -397,6 +397,3 @@ def setup_student():
 with app.app_context():
     db.create_all()
 app.config['PROPAGATE_EXCEPTIONS'] = True
-except Exception as e:
-    print(f"LOGIN ERROR: {e}")
-    flash('Invalid username or password')
