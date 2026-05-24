@@ -185,12 +185,11 @@ def admin_logout():
 def admin_dashboard():
     total_students = Student.query.count()
     total_courses = Course.query.count()
-    recent_students = Student.query.order_by(Student.created_at.desc()).limit(5).all()
+    recent_students = Student.query.order_by(Student.created_at.desc()).limit(5).all() or []
     return render_template('admin/dashboard.html',
-                           total_students=total_students,
-                           total_courses=total_courses,
-                           recent_students=recent_students)
-
+        total_students=total_students,
+        total_courses=total_courses,
+        recent_students=recent_students)
 
 @app.route('/admin/students')
 @admin_required
