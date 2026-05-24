@@ -393,3 +393,6 @@ def setup_student():
     db.session.add(student)
     db.session.commit()
     return "Student created successfully"
+    
+with app.app_context():
+    db.create_all()
