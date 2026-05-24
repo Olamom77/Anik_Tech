@@ -377,3 +377,19 @@ def setup_admin():
     db.session.add(admin)
     db.session.commit()
     return "Admin created successfully"
+
+@app.route('/setup-student-12345')
+def setup_student():
+    if Student.query.filter_by(matric_number="MAT12345").first():
+        return "Student already exists"
+    student = Student(
+        full_name="Test Student",
+        email="student@test.com",
+        matric_number="MAT12345",
+        program="CS",
+        level="100L"
+    )
+    student.set_password("student")
+    db.session.add(student)
+    db.session.commit()
+    return "Student created successfully"
